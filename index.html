@@ -15,6 +15,8 @@
             --dark-color: #2c3e50;
             --text-color: #333;
             --text-light: #7f8c8d;
+            --dark-bg: #1a1a2e;
+            --dark-text: #e6e6e6;
         }
         
         * {
@@ -28,11 +30,22 @@
             line-height: 1.6;
             color: var(--text-color);
             background-color: #f5f5f5;
+            transition: background-color 0.4s, color 0.4s;
+        }
+
+        body.dark-mode {
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
         }
         
         a {
             text-decoration: none;
             color: var(--primary-color);
+            transition: color 0.3s;
+        }
+
+        body.dark-mode a {
+            color: #4da6ff;
         }
         
         ul {
@@ -42,6 +55,7 @@
         img {
             width: 100%;
             height: auto;
+            display: block;
         }
         
         .container {
@@ -60,11 +74,23 @@
             border-radius: 5px;
             cursor: pointer;
             transition: all 0.3s ease;
+            font-weight: 500;
         }
         
         .btn:hover {
             background: #c0392b;
             transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--secondary-color);
+            color: var(--secondary-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--secondary-color);
+            color: white;
         }
         
         .text-center {
@@ -89,6 +115,12 @@
             position: sticky;
             top: 0;
             z-index: 100;
+            transition: background-color 0.4s;
+        }
+
+        body.dark-mode header {
+            background: #16213e;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
         
         .header-container {
@@ -102,10 +134,21 @@
             font-size: 24px;
             font-weight: bold;
             color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        body.dark-mode .logo {
+            color: var(--dark-text);
         }
         
         .logo span {
             color: var(--secondary-color);
+        }
+
+        .logo i {
+            font-size: 22px;
         }
         
         /* Navigation */
@@ -122,9 +165,79 @@
             font-weight: 500;
             transition: color 0.3s ease;
         }
+
+        body.dark-mode nav ul li a {
+            color: var(--dark-text);
+        }
         
         nav ul li a:hover {
             color: var(--secondary-color);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .search-container {
+            position: relative;
+            margin-right: 10px;
+        }
+
+        .search-container input {
+            padding: 8px 35px 8px 15px;
+            border-radius: 20px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+            width: 200px;
+            transition: all 0.3s;
+        }
+
+        body.dark-mode .search-container input {
+            background: #0f3460;
+            border-color: #1a1a2e;
+            color: white;
+        }
+
+        .search-container input:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            width: 250px;
+        }
+
+        .search-container button {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #777;
+            cursor: pointer;
+        }
+
+        .dark-mode-toggle {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: var(--text-color);
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        body.dark-mode .dark-mode-toggle {
+            color: #ffd166;
+        }
+
+        .dark-mode-toggle:hover {
+            background: rgba(0,0,0,0.05);
         }
         
         /* Hamburger Menu */
@@ -132,6 +245,11 @@
             display: none;
             cursor: pointer;
             font-size: 24px;
+            color: var(--text-color);
+        }
+
+        body.dark-mode .menu-toggle {
+            color: var(--dark-text);
         }
         
         /* Hero Section */
@@ -142,6 +260,7 @@
             display: flex;
             align-items: center;
             margin-bottom: 40px;
+            position: relative;
         }
         
         .hero-content {
@@ -156,6 +275,41 @@
         .hero p {
             margin-bottom: 20px;
             font-size: 1.1rem;
+        }
+
+        .breaking-news-ticker {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(231, 76, 60, 0.9);
+            color: white;
+            padding: 10px 0;
+            overflow: hidden;
+        }
+
+        .ticker-content {
+            display: flex;
+            white-space: nowrap;
+            animation: tickerAnimation 30s linear infinite;
+        }
+
+        .ticker-item {
+            padding: 0 40px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+        }
+
+        .ticker-item::before {
+            content: "•";
+            margin-right: 10px;
+            color: #ffd166;
+        }
+
+        @keyframes tickerAnimation {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
         }
         
         /* Main Content */
@@ -172,6 +326,30 @@
             margin-bottom: 20px;
             padding-bottom: 10px;
             border-bottom: 2px solid var(--secondary-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .section-controls button {
+            background: none;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 5px 10px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .section-controls button.active {
+            background: var(--secondary-color);
+            color: white;
+            border-color: var(--secondary-color);
         }
         
         .articles-grid {
@@ -187,6 +365,10 @@
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
         }
+
+        body.dark-mode .article-card {
+            background: #16213e;
+        }
         
         .article-card:hover {
             transform: translateY(-5px);
@@ -196,6 +378,34 @@
         .article-img {
             height: 200px;
             overflow: hidden;
+            position: relative;
+        }
+
+        .article-img .save-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255,255,255,0.8);
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #333;
+        }
+
+        .article-img .save-btn:hover {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        .article-img .save-btn.saved {
+            background: var(--secondary-color);
+            color: white;
         }
         
         .article-img img {
@@ -215,12 +425,49 @@
         .article-content h3 {
             margin-bottom: 10px;
             font-size: 1.2rem;
+            line-height: 1.4;
         }
         
         .article-content p {
             color: var(--text-light);
             font-size: 0.9rem;
             margin-bottom: 15px;
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-top: 15px;
+            padding-top: 10px;
+            border-top: 1px solid #eee;
+        }
+
+        body.dark-mode .article-meta {
+            border-top: 1px solid #30475e;
+        }
+
+        .article-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .article-actions button {
+            background: none;
+            border: none;
+            color: var(--text-light);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.3s;
+            font-size: 0.8rem;
+        }
+
+        .article-actions button:hover {
+            color: var(--secondary-color);
         }
         
         /* Sidebar */
@@ -235,6 +482,11 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.4s;
+        }
+
+        body.dark-mode .sidebar-widget {
+            background: #16213e;
         }
         
         .widget-title {
@@ -247,6 +499,10 @@
         .trending-list li {
             padding: 10px 0;
             border-bottom: 1px solid #eee;
+        }
+
+        body.dark-mode .trending-list li {
+            border-bottom: 1px solid #30475e;
         }
         
         .trending-list li:last-child {
@@ -269,6 +525,7 @@
             align-items: center;
             justify-content: center;
             font-size: 12px;
+            flex-shrink: 0;
         }
         
         .trending-list .trending-text {
@@ -281,6 +538,40 @@
             margin-bottom: 10px;
             border: 1px solid #ddd;
             border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        body.dark-mode .subscribe-form input {
+            background: #0f3460;
+            border-color: #1a1a2e;
+            color: white;
+        }
+
+        .subscribe-form input:focus {
+            border-color: var(--secondary-color);
+            outline: none;
+        }
+
+        .form-message {
+            margin-top: 10px;
+            padding: 8px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .form-message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+
+        .form-message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
         }
         
         .ad-placeholder {
@@ -291,6 +582,15 @@
             justify-content: center;
             color: var(--text-light);
             border-radius: 5px;
+            transition: background-color 0.4s;
+        }
+
+        body.dark-mode .ad-placeholder {
+            background: #0f3460;
+        }
+
+        .saved-articles-container {
+            display: none;
         }
         
         /* Footer */
@@ -298,6 +598,11 @@
             background: var(--dark-color);
             color: white;
             padding: 50px 0 20px;
+            transition: background-color 0.4s;
+        }
+
+        body.dark-mode footer {
+            background: #0f3460;
         }
         
         .footer-content {
@@ -371,6 +676,36 @@
             color: #bdc3c7;
             font-size: 0.9rem;
         }
+
+        .to-top-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: var(--secondary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 99;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .to-top-btn.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .to-top-btn:hover {
+            transform: translateY(-5px);
+        }
         
         /* Responsive Design */
         @media (max-width: 992px) {
@@ -380,6 +715,14 @@
             
             .hero h1 {
                 font-size: 2rem;
+            }
+
+            .search-container input {
+                width: 150px;
+            }
+
+            .search-container input:focus {
+                width: 180px;
             }
         }
         
@@ -399,6 +742,10 @@
                 clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
                 transition: all 0.3s ease;
             }
+
+            body.dark-mode nav {
+                background: #16213e;
+            }
             
             nav.active {
                 clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
@@ -410,6 +757,29 @@
             
             nav ul li {
                 margin: 10px 0;
+            }
+
+            .search-container {
+                margin: 0 0 20px;
+                width: 100%;
+            }
+
+            .search-container input {
+                width: 100%;
+            }
+
+            .search-container input:focus {
+                width: 100%;
+            }
+
+            .header-actions {
+                position: absolute;
+                top: 20px;
+                right: 15px;
+            }
+
+            .dark-mode-toggle {
+                font-size: 18px;
             }
             
             .hero {
@@ -433,6 +803,16 @@
             .articles-grid {
                 grid-template-columns: 1fr;
             }
+
+            .section-title {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .section-controls {
+                align-self: flex-end;
+            }
         }
     </style>
 </head>
@@ -440,10 +820,15 @@
     <!-- Header -->
     <header>
         <div class="container header-container">
-            <a href="#" class="logo">Tiem<span>Pulse</span></a>
-            <div class="menu-toggle" id="menuToggle">
-                <i class="fas fa-bars"></i>
+            <a href="#" class="logo">
+                <i class="fas fa-newspaper"></i>Tiem<span>Pulse</span>
+            </a>
+            
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search news...">
+                <button id="searchButton"><i class="fas fa-search"></i></button>
             </div>
+            
             <nav id="mainNav">
                 <ul>
                     <li><a href="#">Home</a></li>
@@ -453,6 +838,15 @@
                     <li><a href="#">Contact</a></li>
                 </ul>
             </nav>
+            
+            <div class="header-actions">
+                <button class="dark-mode-toggle" id="darkModeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
         </div>
     </header>
 
@@ -466,6 +860,16 @@
                 <a href="#" class="btn">Read More</a>
             </div>
         </div>
+        
+        <div class="breaking-news-ticker">
+            <div class="ticker-content">
+                <div class="ticker-item">Global markets react to new economic policies</div>
+                <div class="ticker-item">Tech giant announces breakthrough in quantum computing</div>
+                <div class="ticker-item">Olympic committee reveals host city for 2036 games</div>
+                <div class="ticker-item">Scientists discover potential treatment for rare disease</div>
+                <div class="ticker-item">Film festival announces winners of prestigious awards</div>
+            </div>
+        </div>
     </section>
 
     <!-- Main Content -->
@@ -473,59 +877,143 @@
         <div class="main-content">
             <!-- Latest News Section -->
             <div class="latest-news">
-                <h2 class="section-title">Latest News</h2>
-                <div class="articles-grid">
+                <h2 class="section-title">
+                    Latest News
+                    <div class="section-controls">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="technology">Tech</button>
+                        <button class="filter-btn" data-filter="sports">Sports</button>
+                        <button class="filter-btn" data-filter="business">Business</button>
+                        <button class="view-saved-btn btn-outline">Saved Articles</button>
+                    </div>
+                </h2>
+                <div class="articles-grid" id="articlesGrid">
                     <!-- Article Card 1 -->
-                    <article class="article-card">
+                    <article class="article-card" data-category="technology">
                         <div class="article-img">
                             <img src="https://images.unsplash.com/photo-1607706189992-eae578626c86?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Tech News">
+                            <button class="save-btn"><i class="far fa-bookmark"></i></button>
                         </div>
                         <div class="article-content">
                             <span class="category">Technology</span>
                             <h3>New AI Breakthrough Could Revolutionize Healthcare</h3>
                             <p>Researchers develop an AI system that can predict patient outcomes with 95% accuracy, potentially transforming diagnostic medicine.</p>
-                            <a href="#" class="btn">Read More</a>
+                            <div class="article-meta">
+                                <span><i class="far fa-clock"></i> 2 hours ago</span>
+                                <div class="article-actions">
+                                    <button class="like-btn"><i class="far fa-heart"></i> 42</button>
+                                    <button class="share-btn"><i class="fas fa-share-alt"></i></button>
+                                </div>
+                            </div>
                         </div>
                     </article>
 
                     <!-- Article Card 2 -->
-                    <article class="article-card">
+                    <article class="article-card" data-category="sports">
                         <div class="article-img">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHs1vgBQGV7bFmyjnqJmcj-HSKuEzpH6xQpw&s" alt="Sports News">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhw7DxzNF1KN7JOXMov60UWOXeDv80nWXAfA&s" alt="Sports News">
+                            <button class="save-btn"><i class="far fa-bookmark"></i></button>
                         </div>
                         <div class="article-content">
                             <span class="category">Sports</span>
                             <h3>Underdog Team Wins Championship Against All Odds</h3>
                             <p>In a stunning upset, the underrated team clinches the title with a last-minute goal that will be remembered for generations.</p>
-                            <a href="#" class="btn">Read More</a>
+                            <div class="article-meta">
+                                <span><i class="far fa-clock"></i> 5 hours ago</span>
+                                <div class="article-actions">
+                                    <button class="like-btn"><i class="far fa-heart"></i> 128</button>
+                                    <button class="share-btn"><i class="fas fa-share-alt"></i></button>
+                                </div>
+                            </div>
                         </div>
                     </article>
 
                     <!-- Article Card 3 -->
-                    <article class="article-card">
+                    <article class="article-card" data-category="business">
                         <div class="article-img">
                             <img src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Y29tcGFueXxlbnwwfHwwfHx8MA%3D%3D" alt="Business News">
+                            <button class="save-btn"><i class="far fa-bookmark"></i></button>
                         </div>
                         <div class="article-content">
                             <span class="category">Business</span>
                             <h3>Major Merger Creates New Market Leader</h3>
                             <p>Two industry giants join forces in a deal worth billions, reshaping the competitive landscape and creating new opportunities.</p>
-                            <a href="#" class="btn">Read More</a>
+                            <div class="article-meta">
+                                <span><i class="far fa-clock"></i> 1 day ago</span>
+                                <div class="article-actions">
+                                    <button class="like-btn"><i class="far fa-heart"></i> 56</button>
+                                    <button class="share-btn"><i class="fas fa-share-alt"></i></button>
+                                </div>
+                            </div>
                         </div>
                     </article>
 
                     <!-- Article Card 4 -->
-                    <article class="article-card">
+                    <article class="article-card" data-category="travel">
                         <div class="article-img">
                             <img src="https://images.unsplash.com/photo-1530521954074-e64f6810b32d?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dHJhdmVsbGluZ3xlbnwwfHwwfHx8MA%3D%3D" alt="Travel News">
+                            <button class="save-btn"><i class="far fa-bookmark"></i></button>
                         </div>
                         <div class="article-content">
                             <span class="category">Travel</span>
                             <h3>New Sustainable Tourism Initiative Launched</h3>
                             <p>Popular destination implements eco-friendly policies to preserve natural beauty while maintaining visitor numbers.</p>
-                            <a href="#" class="btn">Read More</a>
+                            <div class="article-meta">
+                                <span><i class="far fa-clock"></i> 1 day ago</span>
+                                <div class="article-actions">
+                                    <button class="like-btn"><i class="far fa-heart"></i> 31</button>
+                                    <button class="share-btn"><i class="fas fa-share-alt"></i></button>
+                                </div>
+                            </div>
                         </div>
                     </article>
+
+                    <!-- Article Card 5 -->
+                    <article class="article-card" data-category="technology">
+                        <div class="article-img">
+                            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Tech News">
+                            <button class="save-btn"><i class="far fa-bookmark"></i></button>
+                        </div>
+                        <div class="article-content">
+                            <span class="category">Technology</span>
+                            <h3>Revolutionary Battery Tech Promises 3-Day Phone Charge</h3>
+                            <p>New solid-state battery technology could extend device battery life by 300%, with production starting next year.</p>
+                            <div class="article-meta">
+                                <span><i class="far fa-clock"></i> 2 days ago</span>
+                                <div class="article-actions">
+                                    <button class="like-btn"><i class="far fa-heart"></i> 87</button>
+                                    <button class="share-btn"><i class="fas fa-share-alt"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Article Card 6 -->
+                    <article class="article-card" data-category="health">
+                        <div class="article-img">
+                            <img src="https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?q=80&w=1032&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Health News">
+                            <button class="save-btn"><i class="far fa-bookmark"></i></button>
+                        </div>
+                        <div class="article-content">
+                            <span class="category">Health</span>
+                            <h3>Breakthrough in Alzheimer's Research Offers New Hope</h3>
+                            <p>Scientists identify a key protein mechanism that could lead to effective treatments for neurodegenerative diseases.</p>
+                            <div class="article-meta">
+                                <span><i class="far fa-clock"></i> 2 days ago</span>
+                                <div class="article-actions">
+                                    <button class="like-btn"><i class="far fa-heart"></i> 102</button>
+                                    <button class="share-btn"><i class="fas fa-share-alt"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                
+                <div class="saved-articles-container" id="savedArticlesContainer">
+                    <h3 class="section-title">Your Saved Articles</h3>
+                    <div class="articles-grid" id="savedArticlesGrid">
+                        <!-- Saved articles will appear here dynamically -->
+                    </div>
                 </div>
             </div>
 
@@ -571,10 +1059,11 @@
                 <!-- Newsletter Subscription -->
                 <div class="sidebar-widget">
                     <h3 class="widget-title">Subscribe to Newsletter</h3>
-                    <form class="subscribe-form">
-                        <input type="text" placeholder="Your Name">
-                        <input type="email" placeholder="Your Email">
+                    <form class="subscribe-form" id="subscribeForm">
+                        <input type="text" id="subscribeName" placeholder="Your Name" required>
+                        <input type="email" id="subscribeEmail" placeholder="Your Email" required>
                         <button type="submit" class="btn">Subscribe</button>
+                        <div class="form-message" id="subscribeMessage"></div>
                     </form>
                 </div>
 
@@ -632,11 +1121,309 @@
         </div>
     </footer>
 
-    <!-- Simple JavaScript for mobile menu toggle -->
-    
+    <!-- Back to top button -->
+    <div class="to-top-btn" id="toTopBtn">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- JavaScript -->
     <script>
-        document.getElementById('menuToggle').addEventListener('click', function() {
-            document.getElementById('mainNav').classList.toggle('active');
+        // DOM Elements
+        const menuToggle = document.getElementById('menuToggle');
+        const mainNav = document.getElementById('mainNav');
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const searchInput = document.getElementById('searchInput');
+        const searchButton = document.getElementById('searchButton');
+        const articlesGrid = document.getElementById('articlesGrid');
+        const savedArticlesContainer = document.getElementById('savedArticlesContainer');
+        const savedArticlesGrid = document.getElementById('savedArticlesGrid');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const viewSavedBtn = document.querySelector('.view-saved-btn');
+        const saveButtons = document.querySelectorAll('.save-btn');
+        const likeButtons = document.querySelectorAll('.like-btn');
+        const toTopBtn = document.getElementById('toTopBtn');
+        const subscribeForm = document.getElementById('subscribeForm');
+        const subscribeMessage = document.getElementById('subscribeMessage');
+
+        // Mobile menu toggle
+        menuToggle.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+        });
+
+        // Dark mode toggle
+        darkModeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDarkMode);
+            
+            // Update icon
+            const icon = darkModeToggle.querySelector('i');
+            icon.classList.toggle('fa-moon');
+            icon.classList.toggle('fa-sun');
+            
+            // Update button text for screen readers
+            darkModeToggle.setAttribute('aria-label', isDarkMode ? 'Switch to light mode' : 'Switch to dark mode');
+        });
+
+        // Load dark mode preference
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+            const icon = darkModeToggle.querySelector('i');
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+        }
+
+        // Search functionality
+        searchButton.addEventListener('click', performSearch);
+        searchInput.addEventListener('keyup', (e) => {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+
+        function performSearch() {
+            const searchTerm = searchInput.value.toLowerCase().trim();
+            if (searchTerm === '') {
+                document.querySelectorAll('.article-card').forEach(article => {
+                    article.style.display = 'block';
+                });
+                return;
+            }
+
+            
+            const articles = document.querySelectorAll('.article-card');
+            let found = false;
+            
+            articles.forEach(article => {
+                const title = article.querySelector('h3').textContent.toLowerCase();
+                const content = article.querySelector('p').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm)) {
+                    article.style.display = 'block';
+                    article.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    article.animate([
+                        { backgroundColor: 'rgba(231, 76, 60, 0.3)' },
+                        { backgroundColor: 'transparent' }
+                    ], {
+                        duration: 1500,
+                        iterations: 1
+                    });
+                    found = true;
+                } else {
+                    article.style.display = 'none';
+                }
+            });
+            
+            if (!found) {
+                alert('No articles found matching your search.');
+            }
+        }
+
+        // Filter articles by category
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Update active state
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                
+                const filter = button.dataset.filter;
+                
+                // Show all articles
+                if (filter === 'all') {
+                    document.querySelectorAll('.article-card').forEach(card => {
+                        card.style.display = 'block';
+                    });
+                } 
+                // Show saved articles
+                else if (button.classList.contains('view-saved-btn')) {
+                    savedArticlesContainer.style.display = 'block';
+                    articlesGrid.style.display = 'none';
+                } 
+                // Filter by category
+                else {
+                    articlesGrid.style.display = 'grid';
+                    savedArticlesContainer.style.display = 'none';
+                    
+                    document.querySelectorAll('.article-card').forEach(card => {
+                        if (card.dataset.category === filter) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                }
+            });
+        });
+
+        //saved articles toggle
+        let savedArticles = JSON.parse(localStorage.getItem('savedArticles')) || [];
+
+        function loadSavedArticles() {
+            savedArticlesGrid.innerHTML = '';
+            savedArticles.forEach(articleHTML => {
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = articleHTML.trim();
+                const articleClone = tempDiv.firstChild;
+
+                // Add remove handler
+                const cloneSaveBtn = articleClone.querySelector('.save-btn');
+                cloneSaveBtn.innerHTML = '<i class="fas fa-trash-alt"></i>';
+                cloneSaveBtn.addEventListener('click', function() {
+                    savedArticles = savedArticles.filter(a => a !== articleHTML);
+                    localStorage.setItem('savedArticles', JSON.stringify(savedArticles));
+                    loadSavedArticles();
+                });
+
+                savedArticlesGrid.appendChild(articleClone);
+            });
+        }
+        loadSavedArticles();
+
+
+        // Save articles
+        saveButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                this.classList.toggle('saved');
+                this.innerHTML = this.classList.contains('saved') ? 
+                    '<i class="fas fa-bookmark"></i>' : 
+                    '<i class="far fa-bookmark"></i>';
+                
+                const articleCard = this.closest('.article-card');
+                const articleClone = articleCard.cloneNode(true);
+                const articleHTML = articleCard.outerHTML;
+
+                if (this.classList.contains('saved')) {
+                    savedArticles.push(articleHTML);
+                } else {
+                    savedArticles = savedArticles.filter(a => a !== articleHTML);
+                }
+                localStorage.setItem('savedArticles', JSON.stringify(savedArticles));
+                loadSavedArticles();
+                
+                // Update the save button in the cloned article
+                const cloneSaveBtn = articleClone.querySelector('.save-btn');
+                cloneSaveBtn.innerHTML = '<i class="fas fa-trash-alt"></i>';
+                cloneSaveBtn.classList.add('saved');
+                cloneSaveBtn.addEventListener('click', function() {
+                    articleClone.remove();
+                    if (savedArticlesGrid.children.length === 0) {
+                        savedArticlesContainer.style.display = 'none';
+                        articlesGrid.style.display = 'grid';
+                    }
+                });
+                
+                // Add to saved articles
+                savedArticlesGrid.appendChild(articleClone);
+            });
+        });
+
+        // Like articles
+        likeButtons.forEach(button => {
+            const articleId = button.closest('.article-card').querySelector('h3').textContent;
+            let count = parseInt(button.textContent.match(/\d+/)?.[0] || 0);
+
+            // Restore like state
+            if (likedArticles[articleId]) {
+                button.querySelector('i').classList.remove('far');
+                button.querySelector('i').classList.add('fas');
+                button.style.color = '#e74c3c';
+            }
+
+            button.addEventListener('click', function() {
+                const icon = this.querySelector('i');
+                const countElement = this.querySelector('span') || document.createElement('span');
+                
+                if (!this.querySelector('span')) {
+                    this.appendChild(countElement);
+                }
+                
+                if (icon.classList.contains('far')) {
+                    icon.classList.remove('far');
+                    icon.classList.add('fas');
+                    let match = this.textContent.match(/\d+/);
+                    let count = parseInt(match ? match[0] : 0);
+                    count++;
+                    this.innerHTML = '<i class="fas fa-heart"></i> ' + count;
+                    this.style.color = '#e74c3c';
+                    likedArticles[articleId] = true; 
+                } else {
+                    icon.classList.remove('fas');
+                    icon.classList.add('far');
+                    let count = parseInt(this.textContent.match(/\d+/)?.[0] || 0);
+                    count--;
+                    this.innerHTML = '<i class="far fa-heart"></i> ' + count;
+                    this.style.color = '';
+                    delete likedArticles[articleId];
+                    count--;
+                }
+                this.innerHTML = `<i class="${icon.classList.contains('fas') ? 'fas' : 'far'} fa-heart"></i> ${count}`;
+                localStorage.setItem('likedArticles', JSON.stringify(likedArticles));
+            });
+        });
+
+        // Back to top button
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                toTopBtn.classList.add('visible');
+            } else {
+                toTopBtn.classList.remove('visible');
+            }
+        });
+
+        toTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Newsletter subscription
+        subscribeForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('subscribeName').value;
+            const email = document.getElementById('subscribeEmail').value;
+            
+            // Simple validation
+            if (!name || !email) {
+                showMessage('Please fill in all fields.', 'error');
+                return;
+            }
+            
+            if (!validateEmail(email)) {
+                showMessage('Please enter a valid email address.', 'error');
+                return;
+            }
+            
+            // Simulate subscription
+            setTimeout(() => {
+                showMessage(`Thank you, ${name}! You've subscribed to our newsletter.`, 'success');
+                this.reset();
+            }, 1000);
+        });
+
+        function showMessage(message, type) {
+            subscribeMessage.textContent = message;
+            subscribeMessage.className = 'form-message ' + type;
+            
+            // Hide message after 5 seconds
+            setTimeout(() => {
+                subscribeMessage.style.display = 'none';
+            }, 5000);
+        }
+
+        function validateEmail(email) {
+            const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(email);
+        }
+
+        // Share article functionality
+        document.querySelectorAll('.share-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const articleCard = this.closest('.article-card');
+                const title = articleCard.querySelector('h3').textContent;
+                alert(`Share "${title}" on social media!`);
+            });
         });
     </script>
 </body>
